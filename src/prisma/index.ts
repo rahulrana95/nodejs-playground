@@ -1,7 +1,16 @@
 // prisma.ts
 import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
+
+const testConfig = {
+  datasources: {
+    db: {
+      url: 'file:mydatabase.db',
+    },
+  },
+}
+
+const prisma = process.env.TEST_ENV === 'TEST' ? new PrismaClient(testConfig) : new PrismaClient();
 
 const ensureDbConnectedMiddleware = async (req, res, next) => {
     try {
