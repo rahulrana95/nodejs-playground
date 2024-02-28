@@ -44,6 +44,7 @@ const signupHandler = async (req, res) => {
       token,
     });
   } catch (err) {
+    console.log(err)
     res.status(500).json({ error: 'Something went wrong', message: err.message });
   }
 }

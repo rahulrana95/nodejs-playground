@@ -6,7 +6,9 @@ import router from '../routes';
 import loginHandler from '../handlers/login';
 import signupHandler from '../handlers/signup';
 import prisma, { ensureDbConnectedMiddleware } from '../prisma';
+import * as dotenv from 'dotenv';
 
+dotenv.config();
 
 // Define a custom interface for the Express Request object
 interface CustomRequest extends Request {
@@ -16,6 +18,7 @@ interface CustomRequest extends Request {
   
 const app = express();
 
+console.log(ensureDbConnectedMiddleware)
 app.use(ensureDbConnectedMiddleware);
 
 app.use(cors());
