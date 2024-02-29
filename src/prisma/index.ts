@@ -26,5 +26,9 @@ const ensureDbConnectedMiddleware = async (req, res, next) => {
   }
 };
 
+console.log(
+  ensureDbConnectedMiddleware
+)
+
 export { ensureDbConnectedMiddleware };
 export default prisma;

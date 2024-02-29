@@ -14,12 +14,12 @@ const generateDatabaseURL = (schema: string) => {
 };
 
 const schemaId = `test-${v4()}`;
-const prismaBinary = join(__dirname, '..', '..', 'node_modules', '.bin', 'prisma');
+const prismaBinary = join(__dirname, '..', '..','..', 'node_modules', '.bin', 'prisma');
 
 const url = generateDatabaseURL(schemaId);
 process.env.DATABASE_URL = url;
 
-export const prisma = new PrismaClient({
+const prisma = new PrismaClient({
   datasources: { db: { url } },
 });
 
@@ -35,3 +35,6 @@ afterEach(async () => {
   await prisma.$executeRawUnsafe(`DROP SCHEMA IF EXISTS "${schemaId}" CASCADE;`);
   await prisma.$disconnect();
 });
+
+
+export default prisma;

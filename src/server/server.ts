@@ -19,7 +19,7 @@ interface CustomRequest extends Request {
 const app = express();
 
 console.log(ensureDbConnectedMiddleware)
-app.use(ensureDbConnectedMiddleware);
+ensureDbConnectedMiddleware && app.use(ensureDbConnectedMiddleware);
 
 app.use(cors());
 app.use(morgan('combined'));

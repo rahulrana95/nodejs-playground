@@ -1,6 +1,8 @@
 import request from 'supertest';
 import app from "../../server/server";
 import prisma from '../../prisma';
+jest.mock('jsonwebtoken');
+
 
 describe("Login test", () => {
   let user;
@@ -26,12 +28,16 @@ describe("Login test", () => {
     const response = await request(app)
     .post('/signup')
     .send({username: '3ra1@gmail.com', password: '123456'})
-    .set("Accept","applicatino/json");
+    .set("Accept","application/json");
 
     console.log(response)
 
 
-    expect(response.headers["Content-Type"]).toMatch(/json/);
+    expect(response.headers["content-type"]).toMatch(/json/);
     expect(response.status).toBe(200);
+    expect(response.body).toStrictEqual({
+      "token": "mock.token.{\"username\":\"3ra1@gmail.com\"}",
+     "username": "3ra1@gmail.com",
+    })
   })
 })
