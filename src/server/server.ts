@@ -32,6 +32,7 @@ const corsOptions = {
     if (whitelist.includes(origin)) {
       callback(null, true);
     } else {
+      console.log(`This ${origin} is not allowed by cors.`);
       callback(new Error("Not allowed by CORS"));
     }
   },
