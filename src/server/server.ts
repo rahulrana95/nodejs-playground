@@ -22,7 +22,11 @@ const app = express();
 console.log(ensureDbConnectedMiddleware);
 ensureDbConnectedMiddleware && app.use(ensureDbConnectedMiddleware);
 // Whitelist localhost
-const whitelist = ['http://localhost'];
+const whitelist = [
+  "http://localhost",
+  "https://nodejs-playground.onrender.com",
+  "http://nodejs-playground.onrender.com",
+];
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.includes(origin)) {
