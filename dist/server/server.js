@@ -39,7 +39,19 @@ dotenv.config();
 const app = (0, express_1.default)();
 console.log(prisma_1.ensureDbConnectedMiddleware);
 prisma_1.ensureDbConnectedMiddleware && app.use(prisma_1.ensureDbConnectedMiddleware);
-app.use((0, cors_1.default)());
+// Whitelist localhost
+const whitelist = ['http://localhost'];
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.includes(origin)) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+};
+app.use((0, cors_1.default)(corsOptions));
 app.use((0, morgan_1.default)("combined"));
 // Parse JSON bodies
 app.use(body_parser_1.default.json());
