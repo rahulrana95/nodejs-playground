@@ -40,7 +40,11 @@ const app = (0, express_1.default)();
 console.log(prisma_1.ensureDbConnectedMiddleware);
 prisma_1.ensureDbConnectedMiddleware && app.use(prisma_1.ensureDbConnectedMiddleware);
 // Whitelist localhost
-const whitelist = ['http://localhost'];
+const whitelist = [
+    "http://localhost",
+    "https://nodejs-playground.onrender.com",
+    "http://nodejs-playground.onrender.com",
+];
 const corsOptions = {
     origin: function (origin, callback) {
         if (whitelist.includes(origin)) {
