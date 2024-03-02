@@ -21,8 +21,19 @@ const app = express();
 
 console.log(ensureDbConnectedMiddleware);
 ensureDbConnectedMiddleware && app.use(ensureDbConnectedMiddleware);
+// Whitelist localhost
+const whitelist = ['http://localhost'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+app.use(cors(corsOptions));
 
-app.use(cors());
 app.use(morgan("combined"));
 // Parse JSON bodies
 app.use(bodyParser.json());
